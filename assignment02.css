@@ -1,0 +1,106 @@
+/* --- put your css here --- */
+
+/* external css is imported into html using the <link> tag in the <head> section, as shown below.
+
+  <head>
+    <link rel="stylesheet" href="assignment02.css">
+  </head>
+
+*/
+
+/* --- pre-existing css --- */
+body {
+  background-color: skyblue;
+}
+
+#positionMe {
+  z-index:0;
+  position:relative;
+}
+
+.classy {
+  margin-left: 10px;
+}
+
+#igottabeme {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+div {
+  margin-bottom: 50px
+}
+
+span {
+  width: 100px;
+  height: 50px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-style: solid;
+  border-color: blue;
+  border-width: 5px;
+  background-color: yellow;
+}
+
+span.a {
+  display: inline;
+}
+
+span.b {
+  display: block;
+}
+
+span.c {
+  display: inline-block;
+}
+
+img[alt ="cat icon"] {
+  position: fixed;
+  z-index:1;
+  bottom: 0;
+  right: 0;
+}
+
+.dog {
+  position: relative;
+  z-index:1
+  right:50px;
+  bottom:150px;
+}
+
+img[alt = "bird icon"] {
+  position: absolute;
+  top:50px;
+  left:250px;
+}
+
+.stripey tr:nth-child(even) {
+  background-color: gray;
+}
+.stripey tr:nth-child(odd) {
+  background-color: white;
+}
+.stripey th {
+  color: white;
+  background-color: black;
+}
+.mousey td:hover {
+  background-color: yellow;
+}
+.rightey td {
+  text-align: right;
+}
+input[type="text"].pinkey:focus {
+  background-color: pink;
+}
+
+#prio{
+  background-color: lightgreen;
+  position:sticky;
+  z-index: 2;
+  top:0;
+  opacity: 90%;
+  padding: 5px;
+  font-size:20px;
+}
