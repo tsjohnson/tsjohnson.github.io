@@ -104,7 +104,7 @@ function updateScore(){
 function updateOver(){
   let total = 0;
   for (let i = 1; i<19; i++){
-    if(elem[i].children[3].innerHTML > 0)
+    if(elem[i].children[3].innerHTML != "-")
     total = total + Number.parseInt(elem[i].children[3].innerHTML);
   }
   elem[19].children[3].innerHTML = total;
