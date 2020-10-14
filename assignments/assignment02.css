@@ -96,7 +96,7 @@ input[type="text"].pinkey:focus {
 }
 
 #prio{
-  background-color: lightgreen;
+  background-color: limegreen;
   position:sticky;
   z-index: 2;
   top:0;
