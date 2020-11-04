@@ -1,0 +1,12 @@
+.cmn_alignCenter{ text-align: center; 
+                  padding: 2vh;
+                  color: white;
+				  background-color: black;}
+.cmn_alignRight { text-align: right; }
+.cmn_hidden     { display:none; }
+.cmn_green_bkgd { background-color: #CAFF33; }
+.cmn_green      { color: green; }
+.cmn_fullHeight { font-size: 4vh; }
+.cmn_moreHeight { height: 6vh; font-size: 4vh; }
+.cmn_noPadding  { padding: 0px; }
+.cmn_tapEntry   { width: 50px; }

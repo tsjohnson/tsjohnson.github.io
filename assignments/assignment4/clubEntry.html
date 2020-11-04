@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+	<title>ClubMeNow - Club Entry</title>
+	<link rel="icon" href="clubMeNow300x300.png" type="image/png" />
+	<!-- Bootstrap CSS -->
+	<link rel='stylesheet'
+	href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css' />
+	<!-- ClubMeNow custom CSS -->
+	<link rel='stylesheet' href='clubMeNow.css' />
+
+</head>
+
+<body>
+
+<div class='container'>
+
+	<h1>Add Club</h1>
+	<form action='clubDistanceList.html'>
+		<div class='form-group'>
+			<label for='clubName'></label>
+			<input name='clubName' id='clubName' type='text'
+			    class='form-control cmn_moreHeight'
+				placeholder='Driver' required /><br>
+			<button class='btn btn-success cmn_fullHeight'
+			    onclick='addClub();'>&nbsp;&nbsp;&#x2714;&nbsp;&nbsp;</button>
+			<button class='btn btn-danger cmn_fullHeight'
+			    onclick='cancelClub();'>&nbsp;&nbsp;X&nbsp;&nbsp;</button>
+			<br>
+			<br>
+		</div>
+	</form>
+
+	<br>
+	<footer>Copyright &copy;2020 George Corser</footer>
+
+</div>
+
+<!-- ClubMeNow custom JS -->
+<script src='clubMeNow.js'></script>
+<script>
+	// retrieve the row of the user-chosen club
+	let clubRow = parseInt(localStorage.getItem('club'));
+	// retrieve the "clubs" array
+	let clubs = JSON.parse(localStorage.getItem('clubs'));
+	// display the full clubName of the user-chosen club
+	let newClubName ;
+	let newClubDistances;
+
+	function addClub() {
+        // your code here
+				let str = document.getElementById('clubName').value;
+				clubs[clubs.length] = [clubs[clubs.length-1][0], str, str, 0,0,0,0, 100, 100, 100, 100];
+				localStorage.setItem("clubs", JSON.stringify(clubs));
+				if(clubs.length > 14){
+					window.alert("Warning: you are only allowed to carry 14 clubs in your golf bag in match play competition.");
+				}
+				else{
+				window.location.href = "clubDistanceList.html";
+			 	}
+	}
+
+	// navigate to club distance LIST screen
+    function cancelClub() {
+	    window.location.href = "clubDistanceList.html";
+    }
+</script>
+
+</body>
+
+</html>

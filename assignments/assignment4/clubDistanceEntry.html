@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+	<title>ClubMeNow - Distance Entry</title>
+	<link rel="icon" href="clubMeNow300x300.png" type="image/png" />
+	<!-- Bootstrap CSS -->
+	<link rel='stylesheet' 
+	href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css' />
+	<!-- ClubMeNow custom CSS -->
+	<link rel='stylesheet' href='clubMeNow.css' />
+	
+</head>
+
+<body onload='populateStatsTable(); appendTapEntryButtons();'>
+
+<div class='container'>
+
+	<h1>Enter Distance</h1>
+	<form action='clubDistanceList.html'>
+		<h2 id='clubValLbl' class='cmn_green_bkgd'>Club</h2>
+		<div class='form-group'>
+			<input name='clubVal' id='clubVal' type='number' 
+			    class='form-control cmn_moreHeight' placeholder='123' 
+				maxlength="3" required /><br>
+			<button class='btn btn-success cmn_fullHeight' 
+			    onclick='updateStats();'>&nbsp;&nbsp;&#x2714;&nbsp;&nbsp;</button> 
+			<button class='btn btn-danger cmn_fullHeight'  
+			    onclick='cancelClub();'>&nbsp;&nbsp;X&nbsp;&nbsp;</button><br><br>
+		</div>
+	</form>
+
+	<div id='cmn_tapEntryButtons'>
+	</div>
+	<br>
+	
+	<table id='cmn_messageTable' class='table table-bordered'>
+		<tr><td>IMPORTANT: Record distances under <b><i>consistent conditions</i></b><br>. 
+		<ul>
+		<li>CARRY DISTANCE vs TOTAL DISTANCE. Save EITHER <b><i>carry distances</i></b> 
+		OR <b><i>total distances</i></b>. Some people use total distance for Driver, 
+		but carry distance for all other clubs. Whatever you do, be consistent.</li>
+		<li>GOLF BALLS. Use the same brand of new golf balls for all shots.</li>
+		<li>LIES. Optional: add new club to record the same club on different lies. 
+		For example, you might create 3 entries for your 5-iron, one for fairway shots, 
+		one for tee shots, and a third for shots from the rough.</li>
+		<li>BAD SHOTS. Don't record whiffs or bad shots. Distances should be for shots 
+		you hit relatively well. </li>
+		<li>ADJUSTMENTS. Even after measuring accurate distances you will certainly need 
+		to make adjustments when taking actual shots, like (uphill or downhill) elevation 
+		of green relative to position golf ball, altitude, temperature, expected roll or 
+		backspin after carry, lie (like sand, rough), added shaft lean (like when hitting 
+		low under a tree), etc. </li>
+		</ul>
+		</td></tr>
+	<table>
+	<br>
+	<table id='cmn_statsTable' class='table table-bordered'>
+		<tr><th>Club</th><th>Min</th><th>AVG</th><th>Max</th><th>Shots</th></tr>
+		<tr>
+		    <td id='cmn_club' class='cmn_bold'>Club</td><td id='cmn_min'>Min</td>
+		    <td id='cmn_avg' class='cmn_bold'>Avg</td><td id='cmn_max'>Max</td>
+		    <td id='cmn_num'>Num</td>
+		</tr>
+	<table>
+	<br>
+	<footer>Copyright &copy;2020 George Corser</footer>
+	
+</div>
+
+<!-- ClubMeNow custom JS -->
+<script src='clubMeNow.js'></script>
+<script>
+	// retrieve the row of the user-chosen club
+	let clubRow = parseInt(localStorage.getItem('club'));
+	// retrieve the "clubs" array
+	let clubs = JSON.parse(localStorage.getItem('clubs'));
+	// display the full clubName of the user-chosen club
+	document.getElementById('clubValLbl').innerHTML 
+		= '&nbsp;' + clubs[clubRow][2] + '&nbsp;' ; 
+</script>
+	
+</body>
+
+</html>
