@@ -59,6 +59,24 @@ appendTableRow5(table2b,"21", "22", "23","24","25");
 // don't change table3A. it's just a template.
 
 // Use table03A to create table3B. Create new functions as in item 2, above.
+let temp = document.getElementById("3A").children[0].children[0];
+let div3b = document.getElementById("3B");
+let table3b = createTable("table3b");
+div3b.appendChild(table3b);
+table3b.setAttribute("style", "border:1px solid black;")
+table3b.setAttribute("width", "100%")
+appendTableRow4(table3b,"Item","Price","Qty","Price * Qty");
+appendTableRow4(table3b,temp.children[1].children[0].innerHTML,temp.children[1].children[1].innerHTML,temp.children[1].children[2].innerHTML,parseInt(temp.children[1].children[2].innerHTML)*parseInt(temp.children[1].children[2].innerHTML));
+appendTableRow4(table3b,temp.children[2].children[0].innerHTML,temp.children[2].children[1].innerHTML,temp.children[2].children[2].innerHTML,parseInt(temp.children[2].children[2].innerHTML)*parseInt(temp.children[2].children[2].innerHTML));
+appendTableRow4(table3b,temp.children[3].children[0].innerHTML,temp.children[3].children[1].innerHTML,temp.children[3].children[2].innerHTML,parseInt(temp.children[3].children[2].innerHTML)*parseInt(temp.children[3].children[2].innerHTML));
+let col1 = parseFloat(temp.children[1].children[1].innerHTML) + parseFloat(temp.children[2].children[1].innerHTML) + parseFloat(temp.children[3].children[1].innerHTML);
+let col2 = parseFloat(temp.children[1].children[2].innerHTML) + parseFloat(temp.children[2].children[2].innerHTML) + parseFloat(temp.children[3].children[2].innerHTML);
+let col3 = parseFloat(temp.children[1].children[3].innerHTML) + parseFloat(temp.children[2].children[3].innerHTML) + parseFloat(temp.children[3].children[3].innerHTML);
+
+appendTableRow4(table3b,"Totals","col1", "col2", "col3");
+
+
+
 // in table3B, add a column, "Price * Qty", and use JS to compute the correct values to put in the column
 // add to table03B a "totals" row which gives the "grand total" of all numbers in the "Price * Qty" column
 
@@ -209,6 +227,38 @@ function appendTableRow5 (tableobj, col1, col2, col3, col4, col5) {
   tr.appendChild(td3);
   tr.appendChild(td4);
   tr.appendChild(td5);
+  // append the row to the tbody element in the table
+  tableobj.children[0].appendChild(tr);
+
+}
+
+function appendTableRow4 (tableobj, col1, col2, col3, col4) {
+  // create column (table division) DOM objects
+  let td1 = document.createElement("td");
+  let td2 = document.createElement("td");
+  let td3 = document.createElement("td");
+  let td4 = document.createElement("td");
+
+  // adds borders then inserts content into columns
+  td1.setAttribute("style", "border:1px solid black;");
+  td2.setAttribute("style", "border:1px solid black;");
+  td3.setAttribute("style", "border:1px solid black;");
+  td4.setAttribute("style", "border:1px solid black;");
+
+
+  td1.innerHTML = col1;
+  td2.innerHTML = col2;
+  td3.innerHTML = col3;
+  td4.innerHTML = col4;
+
+  // create table row DOM object
+  let tr = document.createElement("tr");
+  // append table divisions (columns) to table row
+  tr.appendChild(td1);
+  tr.appendChild(td2);
+  tr.appendChild(td3);
+  tr.appendChild(td4);
+
   // append the row to the tbody element in the table
   tableobj.children[0].appendChild(tr);
 
