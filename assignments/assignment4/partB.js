@@ -66,14 +66,16 @@ div3b.appendChild(table3b);
 table3b.setAttribute("style", "border:1px solid black;")
 table3b.setAttribute("width", "100%")
 appendTableRow4(table3b,"Item","Price","Qty","Price * Qty");
-appendTableRow4(table3b,temp.children[1].children[0].innerHTML,temp.children[1].children[1].innerHTML,temp.children[1].children[2].innerHTML,parseInt(temp.children[1].children[2].innerHTML)*parseInt(temp.children[1].children[2].innerHTML));
-appendTableRow4(table3b,temp.children[2].children[0].innerHTML,temp.children[2].children[1].innerHTML,temp.children[2].children[2].innerHTML,parseInt(temp.children[2].children[2].innerHTML)*parseInt(temp.children[2].children[2].innerHTML));
-appendTableRow4(table3b,temp.children[3].children[0].innerHTML,temp.children[3].children[1].innerHTML,temp.children[3].children[2].innerHTML,parseInt(temp.children[3].children[2].innerHTML)*parseInt(temp.children[3].children[2].innerHTML));
+row1calc = parseInt(temp.children[1].children[2].innerHTML)*parseInt(temp.children[1].children[2].innerHTML)
+row2calc = parseInt(temp.children[2].children[2].innerHTML)*parseInt(temp.children[2].children[2].innerHTML)
+row3calc =parseInt(temp.children[3].children[2].innerHTML)*parseInt(temp.children[3].children[2].innerHTML)
+appendTableRow4(table3b,temp.children[1].children[0].innerHTML,temp.children[1].children[1].innerHTML,temp.children[1].children[2].innerHTML, row1calc);
+appendTableRow4(table3b,temp.children[2].children[0].innerHTML,temp.children[2].children[1].innerHTML,temp.children[2].children[2].innerHTML,row2calc);
+appendTableRow4(table3b,temp.children[3].children[0].innerHTML,temp.children[3].children[1].innerHTML,temp.children[3].children[2].innerHTML,row3calc);
 let col1 = parseFloat(temp.children[1].children[1].innerHTML) + parseFloat(temp.children[2].children[1].innerHTML) + parseFloat(temp.children[3].children[1].innerHTML);
 let col2 = parseFloat(temp.children[1].children[2].innerHTML) + parseFloat(temp.children[2].children[2].innerHTML) + parseFloat(temp.children[3].children[2].innerHTML);
-let col3 = parseFloat(temp.children[1].children[3].innerHTML) + parseFloat(temp.children[2].children[3].innerHTML) + parseFloat(temp.children[3].children[3].innerHTML);
-
-appendTableRow4(table3b,"Totals","col1", "col2", "col3");
+let col3 = row1calc + row2calc + row3calc;
+appendTableRow4(table3b,"Totals",col1, col2, col3);
 
 
 
