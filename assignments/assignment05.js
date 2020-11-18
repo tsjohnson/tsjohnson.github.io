@@ -79,11 +79,11 @@ var chartData = {
 
 function loadContent() {
   if (localStorage.length > 0){
-    let lastReq = localStorage.getItem("lastReq");
+    var lastReq = localStorage.getItem("lastReq");
     lastReq = new Date(lastReq);
-    let final = new Date();
-    let msperday = 1000*60*60*24;
-    let daysElapsed = (final - lastReq)/msperday;
+    var final = new Date();
+    var msperday = 1000*60*60*24;
+    var daysElapsed = (final - lastReq)/msperday;
     localStorage.setItem("daysElapsed", daysElapsed);
   }
 
@@ -97,7 +97,7 @@ function loadContent() {
     localStorage.setItem("daysElapsed", 0);
     console.log("Time for an update!");
 
-    let ajaxReq = new XMLHttpRequest();
+    var ajaxReq = new XMLHttpRequest();
     ajaxReq.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200){
         localStorage.setItem("response", this.responseText);
@@ -112,13 +112,13 @@ if (localStorage.getItem("response") != null){
   update()
 }
 function update() {
-  let covidJson = localStorage.getItem("response");
-  let covidJsObj = JSON.parse(covidJson);
+  var covidJson = localStorage.getItem("response");
+  var covidJsObj = JSON.parse(covidJson);
 
   console.log(covidJsObj);
   newConfirmedOver1000 = [];
   popData = [];
-  for (let c of covidJsObj.Countries) {
+  for (var c of covidJsObj.Countries) {
     if (c.NewConfirmed > 10000) {
       newConfirmedOver1000.push({
         "Slug": c.Slug,
@@ -128,7 +128,7 @@ function update() {
       });
     }
   }
-  for (let country of covidJsObj.Countries){
+  for (var country of covidJsObj.Countries){
     popData.push({
       "Slug": country.Slug,
       "TotalConfirmed": country.TotalConfirmed,
@@ -141,7 +141,7 @@ function update() {
 
   console.log(popData);
   filteredData = [];
-  for (let country of popData){
+  for (var country of popData){
     if (country.TotalDeaths > 50000){
       filteredData.push(country);
     }
@@ -182,7 +182,7 @@ function update() {
 
 
 // data from: https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population
-let populations = {
+var populations = {
   'china' : 1405137440,
 'india' : 1369152434,
 'united-states' : 330578332,
