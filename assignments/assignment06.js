@@ -1,4 +1,4 @@
-// --- global variables ---
+// --- global variables --- 
 //I set up the loans array with a default value
 var loans = [
     { loan_year: 0, loan_amount: 0, loan_int_rate: 0 }
