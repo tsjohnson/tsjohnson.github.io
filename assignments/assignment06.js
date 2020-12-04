@@ -1,8 +1,10 @@
-// --- global variables --- 
+// --- global variables ---
 //I set up the loans array with a default value
 var loans = [
     { loan_year: 0, loan_amount: 0, loan_int_rate: 0 }
   ];
+//I will compare the boxes to this pattern later
+regex = /[0-9]/;
 
 //If there is something in local storage, set loans equal to that.
 if (localStorage.length > 0){
@@ -19,8 +21,16 @@ else{
     { loan_year: 2024, loan_amount: 10000.00, loan_int_rate: 0.0453 }
   ];
 }
+
+for (var x = 0; x < 5; x++){
+  if (loans[x].loan_year === null) loans[x].loan_year = 0;
+  if (loans[x].loan_amount === null) loans[x].loan_amount = 0;
+  if (loans[x].loan_int_rate === null) loans[x].loan_int_rate = 0;
+}
 // --- function: loadDoc() ---
-function loadDoc() {
+//replacement for loadDoc()
+$(document).ready(function(){
+
 
   // pre-fill defaults for first loan year
   var defaultYear = loans[0].loan_year;
@@ -36,6 +46,7 @@ function loadDoc() {
 
   for(var i=2; i<6; i++) {
     //put the id in the beginning parenthesis, followed by the method, followed by the attribute and value.
+    //It's mostly just shifting things around.
     $('#loan_year0' + i).attr("value",defaultYear++);
     $('#loan_year0' + i).attr("disabled",true);
     $('#loan_year0' + i).css("backgroundColor","gray");
@@ -60,6 +71,9 @@ function loadDoc() {
   });
   $("input[type=text]").blur(function() {
     $(this).css("background-color", "white");
+    if (!regex.test(parseInt($(this).val()))){
+      $(this).css("background-color", "red");
+    }
   });
 
   // set focus to first year: messes up codepen
@@ -68,7 +82,7 @@ function loadDoc() {
     updateLoansArray();
   });
 
-} // end: function loadDoc()
+}); // end: function loadDoc()
 
 
 function toComma(value) {
@@ -76,6 +90,7 @@ function toComma(value) {
 }
 
 function updateLoansArray() {
+
   //Sets the initial year and interest to the values in the first boxes
   loans[0].loan_year = parseInt($("#loan_year01").val());
   loans[0].loan_int_rate = parseFloat($("#loan_int01").val());
@@ -104,4 +119,28 @@ function updateLoansArray() {
     localStorage.setItem("loans", pack);
   }
 
+//check();
 }
+/*
+function check(){
+  for (var j = 1; j < 6; j++){
+    //regex is any patern [1-9] as declared at the beginning
+    //This checks for if value in the top box in the year collumn does not follow the pattern
+    if (!regex.test(parseInt($("#loan_year0" + j).val()))){
+      //If it doesn't follow the pattern then the box will be red.
+      $('#loan_year0' + j).css("backgroundColor","red");
+    }
+    console.log((parseFloat($("#loan_int0" + j).val())));
+    //this does the same as above but for the interest rate
+    if (!regex.test(parseFloat($("#loan_int0" + j).val()))){
+      console.log(!regex.test(parseFloat($("#loan_int0" + j).val())));
+      $('#loan_int0' + j).css("backgroundColor", "red");
+    }
+
+    if (!regex.test(parseInt($("#loan_amt0"+ j).val()))){
+      $("#loan_amt0"+ j).css("backgroundColor","red");
+    }
+
+  }
+}
+*/
