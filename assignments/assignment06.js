@@ -82,6 +82,11 @@ $(document).ready(function(){
     updateLoansArray();
   });
 
+  for (var i = 0; i < 5; i++){
+    var balance = 0;
+    balance = ((loans[i].loan_int_rate+1)*(loans[i].loan_amount+balance)).toFixed(2);
+    $("#loan_bal0"+ (i+1) ).text("$"+ balance);
+  }
 }); // end: function loadDoc()
 
 
