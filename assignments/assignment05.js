@@ -139,7 +139,6 @@ function update() {
   );
   }
 
-  console.log(hey);
   filteredData = [];
   for (var country of popData){
     if (country.TotalDeaths > 50000){
