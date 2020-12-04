@@ -1,3 +1,4 @@
+var totalBalance = 7219.62;
 // --- global variables ---
 //I set up the loans array with a default value
 var loans = [
@@ -87,6 +88,7 @@ $(document).ready(function(){
     balance = ((loans[i].loan_int_rate+1)*(loans[i].loan_amount+balance)).toFixed(2);
     $("#loan_bal0"+ (i+1) ).text("$"+ balance);
   }
+  updateLoansArray();
 }); // end: function loadDoc()
 
 
@@ -100,8 +102,9 @@ function updateLoansArray() {
   loans[0].loan_year = parseInt($("#loan_year01").val());
   loans[0].loan_int_rate = parseFloat($("#loan_int01").val());
   //create variables
-  var accrued = 0;
-  var balance = 0;
+  var accrued = 0.0;
+  var balance = 0.0;
+  var interest = 0.0;
   //loop through every object in loans
   for(var i=0; i<5; i++) {
     //Set the text in the year box to the initial year + i which will be an extra year each time
@@ -115,6 +118,7 @@ function updateLoansArray() {
     $("#loan_int0"+ (i+1) ).val(loans[0].loan_int_rate);
     //calculates the year end balance
     balance = ((loans[i].loan_int_rate+1)*(loans[i].loan_amount+accrued)).toFixed(2);
+    totalBalance = ((loans[i].loan_int_rate+1)*(loans[i].loan_amount+accrued));
     //writes the year end balance
     $("#loan_bal0"+ (i+1) ).text("$"+ balance);
     //stores the year end balance in accrued, two variables might be uneccessary
@@ -123,29 +127,33 @@ function updateLoansArray() {
     pack = JSON.stringify(loans);
     localStorage.setItem("loans", pack);
   }
-
-//check();
+  interest = balance - loans[0].loan_amount - loans[1].loan_amount - loans[2].loan_amount - loans[3].loan_amount - loans[4].loan_amount;
+  $("#loan_int_accrued").text(interest.toFixed(2));
 }
-/*
-function check(){
-  for (var j = 1; j < 6; j++){
-    //regex is any patern [1-9] as declared at the beginning
-    //This checks for if value in the top box in the year collumn does not follow the pattern
-    if (!regex.test(parseInt($("#loan_year0" + j).val()))){
-      //If it doesn't follow the pattern then the box will be red.
-      $('#loan_year0' + j).css("backgroundColor","red");
-    }
-    console.log((parseFloat($("#loan_int0" + j).val())));
-    //this does the same as above but for the interest rate
-    if (!regex.test(parseFloat($("#loan_int0" + j).val()))){
-      console.log(!regex.test(parseFloat($("#loan_int0" + j).val())));
-      $('#loan_int0' + j).css("backgroundColor", "red");
-    }
 
-    if (!regex.test(parseInt($("#loan_amt0"+ j).val()))){
-      $("#loan_amt0"+ j).css("backgroundColor","red");
+//angular
+let app = angular.module("myPayments", []);
+app.controller("myController", function($scope) {
+
+
+  $scope.processForm = function () {
+    $scope.data = [];
+    let year = [];
+    console.log(totalBalance);
+    let totalDebt = totalBalance;
+    let bal = totalDebt;
+    let endyear = loans[4].loan_year;
+    let pay = totalBalance/8;
+    let int_rt = loans[0].loan_int_rate;
+    let int_amt = 0;
+    for (let x = 0; x < 9; x++){
+      bal = bal - pay;
+      int_amt = (bal*int_rt);
+      bal = bal + int_amt
+      $scope.data[x] = {year: endyear + 1 + x, payment: pay.toFixed(2), inter: int_amt.toFixed(2), balan: bal.toFixed(2)};
     }
+    $scope.data[9] = {year: endyear + 10, payment: bal.toFixed(2), inter: (0).toFixed(2), balan: (0).toFixed(2)};
 
   }
-}
-*/
+
+});

@@ -15,11 +15,16 @@
      #loan_table {background-color: pink;}
    </style>
 
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+   <script>
+
+
+     </script>
  </head>
 
  <body>
 
-   <div class="container">
+   <div class="container" ng-app="myPayments" ng-controller="myController">
 
      <form>
 
@@ -76,7 +81,7 @@
                </tr>
              </table>
              <br />
-             <button type="button" class="btn btn-primary" onclick="processForm();">Re-calculate</button>
+             <button type="button" class="btn btn-primary" ng-click="processForm()">Re-calculate</button>
            </div>
          </div>
 
@@ -92,13 +97,12 @@
                  <th>Int Amt</th>
                  <th>YE Bal</th>
                </tr>
-               <tr>
-                 <td><span id="pmt_year01">2025</span></td>
-                 <td><span id="pmt_amt01">$6,500.00</span></td>
-                 <td><span id="pmt_int01">$2,297.60</span></td>
-                 <td><span id="pmt_bal01">$53,017.22</span></td>
+               <tr ng-repeat="x in data">
+                 <td><span id="pmt_year01">{{x.year}}</span></td>
+                 <td><span id="pmt_amt01">${{x.payment}}</span></td>
+                 <td><span id="pmt_int01">${{x.inter}}</span></td>
+                 <td><span id="pmt_bal01">${{x.balan}}</span></td>
                </tr>
-
              </table>
            </div>
          </div>
@@ -116,6 +120,6 @@
  crossorigin="anonymous"></script>
 
  </body>
- <script src = "assignment06.js"></script>
 
+ <script src = "assignment06.js"></script>
 </html>
