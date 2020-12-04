@@ -1,5 +1,8 @@
-var totalBalance = 7219.62;
+
 // --- global variables ---
+//I make this global so I can use it later with the calculations
+var totalBalance = 7219.62;
+
 //I set up the loans array with a default value
 var loans = [
     { loan_year: 0, loan_amount: 0, loan_int_rate: 0 }
@@ -23,6 +26,8 @@ else{
   ];
 }
 
+//The page wouldn't properly reload if any of the values in the array were null
+//So I set anything null equal to 0
 for (var x = 0; x < 5; x++){
   if (loans[x].loan_year === null) loans[x].loan_year = 0;
   if (loans[x].loan_amount === null) loans[x].loan_amount = 0;
@@ -70,9 +75,11 @@ $(document).ready(function(){
     $(this).select();
     $(this).css("background-color", "yellow");
   });
+  //Every time you unfocus something, make sure what was unfocused is proper.
   $("input[type=text]").blur(function() {
     $(this).css("background-color", "white");
     if (!regex.test(parseInt($(this).val()))){
+      //If it's not proper then highlight it in red
       $(this).css("background-color", "red");
     }
   });
@@ -131,18 +138,20 @@ function updateLoansArray() {
   $("#loan_int_accrued").text(interest.toFixed(2));
 }
 
-//angular
+//angular setup
 let app = angular.module("myPayments", []);
 app.controller("myController", function($scope) {
 
 
+  //This is called when the button is clicked
   $scope.processForm = function () {
+    //I make the data object readable by the html part by adding $scope to it.
     $scope.data = [];
     let year = [];
-    console.log(totalBalance);
     let totalDebt = totalBalance;
     let bal = totalDebt;
     let endyear = loans[4].loan_year;
+    //This gets it payed back in 10 years.
     let pay = totalBalance/8;
     let int_rt = loans[0].loan_int_rate;
     let int_amt = 0;
@@ -153,7 +162,7 @@ app.controller("myController", function($scope) {
       $scope.data[x] = {year: endyear + 1 + x, payment: pay.toFixed(2), inter: int_amt.toFixed(2), balan: bal.toFixed(2)};
     }
     $scope.data[9] = {year: endyear + 10, payment: bal.toFixed(2), inter: (0).toFixed(2), balan: (0).toFixed(2)};
-
+    $("table:nth-child(3)").css("background-color", "yellow")
   }
 
 });
