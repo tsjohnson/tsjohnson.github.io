@@ -11,7 +11,7 @@ var loans = [
 regex = /[0-9]/;
 
 //If there is something in local storage, set loans equal to that.
-if (localStorage.length > 0){
+if (localStorage.getItem("loans") !== null){
   loans = localStorage.getItem("loans")
   loans = JSON.parse(loans);
 }
